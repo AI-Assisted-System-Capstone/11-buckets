@@ -1,0 +1,226 @@
+[
+  {
+    "step": "1. load + label construction on full CSV, then 500-row stratified slice",
+    "status": "PASS",
+    "detail": {
+      "rows": 500,
+      "hurt": 99,
+      "no_harm_score": 79,
+      "no_event_code": 3,
+      "buckets": {
+        "E": 217,
+        "ME": 97,
+        "C": 57,
+        "T": 33,
+        "EQ": 27,
+        "I": 21,
+        "FALL": 15,
+        "O": 14,
+        "SI": 7,
+        "ADR": 6,
+        "SH": 3
+      }
+    },
+    "sec": 1.5
+  },
+  {
+    "step": "2. label rules: 11-bucket prefix + harm cut point",
+    "status": "PASS",
+    "detail": "ME case-folded; no-dash rows unlabeled; A-D->0, E-I->1, blank->unlabeled",
+    "sec": 0.0
+  },
+  {
+    "step": "3. guardrail negative tests (each must hard-fail)",
+    "status": "PASS",
+    "detail": {
+      "leakage: each of 6 excluded + 2 label cols": "raised LeakageError",
+      "build_input_text with manager_comments": "Excluded/label columns in model features: ['manager_comments']",
+      "ReportDataset with Level of Invet": "Excluded/label columns in model features: ['Level of Invet']",
+      "Head A set missing SH (10 classes)": "t: expected exactly 11 event-type labels, got 10: ['ADR', 'C', 'E', 'EQ', 'FALL', 'I', 'ME', 'O', 'SI', 'T']",
+      "Head A set with a 12th class": "t: expected exactly 11 event-type labels, got 12: ['<unknown id 11>', 'ADR', 'C', 'E', 'EQ', 'FALL', 'I', 'ME', 'O', 'SH', 'SI', 'T']",
+      "prevalence check with TRAIN/TEST swapped": "TRAIN hurt prevalence 0.0485 outside expected [0.135, 0.165]",
+      "Event No. split vs Event Date mismatch": "1 rows where Event No. split disagrees with Event Date, e.g. [('TRAIN', 10)]",
+      "unknown event-type code": "Event-type codes outside the 11 buckets: ['ZZ']"
+    },
+    "sec": 0.1
+  },
+  {
+    "step": "4. tokenization (tiny BERT + Bio_ClinicalBERT tokenizers)",
+    "status": "PASS",
+    "detail": {
+      "prajjwal1/bert-tiny": {
+        "batch_shape": [
+          16,
+          211
+        ],
+        "max_tokens_in_slice": 338,
+        "truncated": 0
+      },
+      "emilyalsentzer/Bio_ClinicalBERT": {
+        "batch_shape": [
+          16,
+          214
+        ],
+        "max_tokens_in_slice": 353,
+        "truncated": 0
+      }
+    },
+    "sec": 1.8
+  },
+  {
+    "step": "5. forward pass through both heads + gradient path Head B -> Head A (tiny encoder)",
+    "status": "PASS",
+    "detail": {
+      "full": {
+        "head_a_out": [
+          32,
+          11
+        ],
+        "head_b_in_features": 139,
+        "bce_grad_into_head_a": 0.773935
+      },
+      "ablation": {
+        "head_a_out": [
+          32,
+          11
+        ],
+        "head_b_in_features": 128,
+        "bce_grad_into_head_a": 0.0
+      }
+    },
+    "sec": 0.7
+  },
+  {
+    "step": "6. one training step + checkpoint + resume via train_encoder.fit (tiny encoder)",
+    "status": "PASS",
+    "detail": {
+      "device": "mps",
+      "first_run_logs": [
+        "400 train rows, 25 optimizer steps/epoch, cap 1 steps (1 epochs), eval every 1 steps, patience 3, batch 16 x accum 1, fp16=False, length bucketing=True",
+        "step 1/1 loss 2.5870 (CE 1.3923, BCE 1.1947) 4.52 steps/s, ETA to the 1-step cap 0.00 h (early stopping may end sooner)"
+      ],
+      "checkpoint_files": [
+        "best_model.pt",
+        "config.json",
+        "step_0000001.pt"
+      ],
+      "resume": "Resumed from /var/folders/q8/09t8bb5x3l1930wlh_7g51l00000gn/T/tmp4t0zbuuy/step_0000001.pt at step 1 (epoch 0, batch 1)",
+      "val_history_keys": [
+        "epoch",
+        "event_accuracy",
+        "event_macro_f1",
+        "harm_pr_auc",
+        "harm_prevalence",
+        "step"
+      ]
+    },
+    "sec": 1.8
+  },
+  {
+    "step": "6b. early stopping: stops after `patience` evals without improvement, restores the best weights",
+    "status": "PASS",
+    "detail": {
+      "evals_at_steps": [
+        2,
+        4,
+        6
+      ],
+      "stop_log": "Early stopping at step 6: best score 0.5000",
+      "best_restored": true,
+      "resume_after_stop_trains": false,
+      "resume_with_other_model": "/var/folders/q8/09t8bb5x3l1930wlh_7g51l00000gn/T/tmpuvvnqd9d holds a checkpoint from a different mod",
+      "resume_from_pre_fix_checkpoint": "/var/folders/q8/09t8bb5x3l1930wlh_7g51l00000gn/T/tmpu6_b7w3j holds a checkpoint from a different mod",
+      "resume_with_other_batch_size": "Checkpoint /var/folders/q8/09t8bb5x3l1930wlh_7g51l00000gn/T/tmpuvvnqd9d/step_0000006.pt wa"
+    },
+    "sec": 3.0
+  },
+  {
+    "step": "6c. length bucketing: every row once per epoch, reproducible, less padding",
+    "status": "PASS",
+    "detail": {
+      "random": {
+        "padding_waste": 0.658
+      },
+      "bucketed": {
+        "padding_waste": 0.072
+      }
+    },
+    "sec": 0.0
+  },
+  {
+    "step": "6d. batch-size probe runs and reports (tiny model, batch 8/16)",
+    "status": "PASS",
+    "detail": {
+      "device": "mps",
+      "largest_fitting": 16,
+      "report": [
+        {
+          "batch_size": 8,
+          "peak_gb": 1.22,
+          "device_gb": 11.84,
+          "fits_with_headroom": true
+        },
+        {
+          "batch_size": 16,
+          "peak_gb": 1.21,
+          "device_gb": 11.84,
+          "fits_with_headroom": true
+        }
+      ]
+    },
+    "sec": 0.4
+  },
+  {
+    "step": "7. baseline path: MiniLM embeddings + MLP heads, one step each (full + ablation)",
+    "status": "PASS",
+    "detail": {
+      "embedding_dim": 384,
+      "max_seq_length": 256,
+      "full": {
+        "loss": 3.1166,
+        "ce": 2.4161,
+        "bce": 0.7005
+      },
+      "ablation": {
+        "loss": 3.1261,
+        "ce": 2.426,
+        "bce": 0.7001
+      }
+    },
+    "sec": 1.2
+  },
+  {
+    "step": "8. evaluation + guardrail functions on synthetic predictions",
+    "status": "PASS",
+    "detail": {
+      "threshold_rule": "highest threshold with validation hurt-class recall >= 95%",
+      "val_recall": 0.951,
+      "test_recall": 0.941,
+      "ece_after_platt": 0.0257,
+      "event-type ceiling warning fired on identical preds": "11/11 buckets"
+    },
+    "sec": 0.0
+  },
+  {
+    "step": "9. ONE real Bio_ClinicalBERT optimizer step (batch 2) via train_encoder.fit",
+    "status": "PASS",
+    "detail": {
+      "device": "mps",
+      "logs": [
+        "2 train rows, 1 optimizer steps/epoch, cap 1 steps (1 epochs), eval every 1 steps, patience 3, batch 2 x accum 1, fp16=False, length bucketing=True",
+        "step 1/1 loss 3.1886 (CE 2.6036, BCE 0.5850) 1.84 steps/s, ETA to the 1-step cap 0.00 h (early stopping may end sooner)",
+        "validation @ step 1: {'event_macro_f1': 0.045454545454545456, 'event_accuracy': 0.25, 'harm_pr_auc': 0.75, 'harm_prevalence': 0.5, 'step': 1, 'epoch': 0}",
+        "  new best (val harm PR-AUC + event macro-F1 = 0.7955) -> best_model.pt"
+      ],
+      "val_summary": {
+        "event_macro_f1": 0.045454545454545456,
+        "event_accuracy": 0.25,
+        "harm_pr_auc": 0.75,
+        "harm_prevalence": 0.5,
+        "step": 1,
+        "epoch": 0
+      }
+    },
+    "sec": 3.5
+  }
+]

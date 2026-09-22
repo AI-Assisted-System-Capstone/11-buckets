@@ -1,0 +1,21 @@
+# Local-only data: never commit
+*.csv
+!reports/*.csv
+!outputs/baseline_seed_runs.csv
+outputs/processed/*.parquet
+
+# Large / regenerable outputs
+outputs/embeddings/
+outputs/baseline/
+outputs/baseline_ablation/
+outputs/main/
+outputs/main_ablation/
+*.pt
+*.npy
+
+# Environment and OS files
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.claude/

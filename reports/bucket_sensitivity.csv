@@ -1,0 +1,21 @@
+bucket,n,mean_abs_diff,max_abs_diff,comparison
+ADR,116,0.1130649596452713,0.6616847515106201,baseline: with vs Head A replaced by train prior
+C,748,0.07361771166324615,0.7669422626495361,baseline: with vs Head A replaced by train prior
+E,4447,0.014818442054092884,0.5950019359588623,baseline: with vs Head A replaced by train prior
+EQ,369,0.022167058661580086,0.14257465302944183,baseline: with vs Head A replaced by train prior
+FALL,199,0.05567082017660141,0.5381110906600952,baseline: with vs Head A replaced by train prior
+I,350,0.026655038818717003,0.2024707794189453,baseline: with vs Head A replaced by train prior
+ME,1579,0.024507373571395874,0.26346147060394287,baseline: with vs Head A replaced by train prior
+O,16,0.12309344112873077,0.5808871984481812,baseline: with vs Head A replaced by train prior
+SI,164,0.07337632775306702,0.4392472207546234,baseline: with vs Head A replaced by train prior
+T,317,0.033065054565668106,0.3050428330898285,baseline: with vs Head A replaced by train prior
+ADR,116,0.05413376912474632,0.2797010838985443,baseline vs baseline_ablation (separately trained)
+C,748,0.06271743774414062,0.4866921603679657,baseline vs baseline_ablation (separately trained)
+E,4447,0.03018975257873535,0.4716852307319641,baseline vs baseline_ablation (separately trained)
+EQ,369,0.04473463073372841,0.3093809187412262,baseline vs baseline_ablation (separately trained)
+FALL,199,0.043091099709272385,0.27602419257164,baseline vs baseline_ablation (separately trained)
+I,350,0.04002046212553978,0.3936345875263214,baseline vs baseline_ablation (separately trained)
+ME,1579,0.027437403798103333,0.30804455280303955,baseline vs baseline_ablation (separately trained)
+O,16,0.09177092462778091,0.29747238755226135,baseline vs baseline_ablation (separately trained)
+SI,164,0.062570720911026,0.25460517406463623,baseline vs baseline_ablation (separately trained)
+T,317,0.041668601334095,0.4131900370121002,baseline vs baseline_ablation (separately trained)

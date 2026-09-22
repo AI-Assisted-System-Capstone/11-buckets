@@ -1,0 +1,42 @@
+[
+  {
+    "variant": "bert_512_bs8x4_nobucket",
+    "model_name": "emilyalsentzer/Bio_ClinicalBERT",
+    "max_length": 512,
+    "batch_size": 8,
+    "grad_accum": 4,
+    "length_bucketing": false,
+    "device": "mps",
+    "optimizer_steps_measured": 50,
+    "rows_per_optimizer_step": 32,
+    "steps_per_sec": 0.43,
+    "sec_per_step": 2.3255813953488373,
+    "hours_per_epoch": 1.2112403100775193,
+    "eta_hours_to_cap": 4.844961240310077,
+    "cap_steps": 7500,
+    "cap_epochs": 4,
+    "wall_sec_incl_load_and_val": 133.5,
+    "swapped_out_gb_during_run": 3.25,
+    "timing_reliable": false
+  },
+  {
+    "variant": "bert_320_bs8x4_bucket",
+    "model_name": "emilyalsentzer/Bio_ClinicalBERT",
+    "max_length": 320,
+    "batch_size": 8,
+    "grad_accum": 4,
+    "length_bucketing": true,
+    "device": "mps",
+    "optimizer_steps_measured": 50,
+    "rows_per_optimizer_step": 32,
+    "steps_per_sec": 0.78,
+    "sec_per_step": 1.282051282051282,
+    "hours_per_epoch": 0.6677350427350427,
+    "eta_hours_to_cap": 2.6709401709401708,
+    "cap_steps": 7500,
+    "cap_epochs": 4,
+    "wall_sec_incl_load_and_val": 78.9,
+    "swapped_out_gb_during_run": 0.6,
+    "timing_reliable": false
+  }
+]

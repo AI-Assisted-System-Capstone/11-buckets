@@ -1,0 +1,21 @@
+data checks passed: {'TRAIN': 0.15108502525403766, 'VALIDATION': 0.04127906976744186, 'TEST': 0.048484119345524546}
+baseline seed 0: best epoch 48, val {'event_macro_f1': 0.7376120668428499, 'event_accuracy': 0.8726617985395618, 'harm_pr_auc': 0.3552041541140447, 'harm_prevalence': 0.04127906976744186, 'epoch': 48}
+baseline seed 1: best epoch 68, val {'event_macro_f1': 0.7369688805712941, 'event_accuracy': 0.8711613484045213, 'harm_pr_auc': 0.3548756097958687, 'harm_prevalence': 0.04127906976744186, 'epoch': 68}
+baseline seed 2: best epoch 79, val {'event_macro_f1': 0.7410524009686849, 'event_accuracy': 0.8744623387016105, 'harm_pr_auc': 0.36363990772231497, 'harm_prevalence': 0.04127906976744186, 'epoch': 79}
+baseline seed 3: best epoch 74, val {'event_macro_f1': 0.7484838036132628, 'event_accuracy': 0.8716614984495349, 'harm_pr_auc': 0.3522984974829414, 'harm_prevalence': 0.04127906976744186, 'epoch': 74}
+baseline seed 4: best epoch 41, val {'event_macro_f1': 0.7423500992395681, 'event_accuracy': 0.8668600580174052, 'harm_pr_auc': 0.3314473038370246, 'harm_prevalence': 0.04127906976744186, 'epoch': 41}
+  OOF fold 0 done
+  OOF fold 1 done
+  OOF fold 2 done
+  OOF fold 3 done
+  OOF fold 4 done
+baseline_ablation seed 0: best epoch 51, val {'event_macro_f1': 0.7346545903711593, 'event_accuracy': 0.8691607482244673, 'harm_pr_auc': 0.33317630428805645, 'harm_prevalence': 0.04127906976744186, 'epoch': 51}
+baseline_ablation seed 1: best epoch 67, val {'event_macro_f1': 0.734908594331105, 'event_accuracy': 0.8699609882964889, 'harm_pr_auc': 0.3409358518082338, 'harm_prevalence': 0.04127906976744186, 'epoch': 67}
+baseline_ablation seed 2: best epoch 41, val {'event_macro_f1': 0.7346295271028197, 'event_accuracy': 0.8686605981794538, 'harm_pr_auc': 0.3260149002290737, 'harm_prevalence': 0.04127906976744186, 'epoch': 41}
+baseline_ablation seed 3: best epoch 86, val {'event_macro_f1': 0.739474501127103, 'event_accuracy': 0.8716614984495349, 'harm_pr_auc': 0.3349543018107469, 'harm_prevalence': 0.04127906976744186, 'epoch': 86}
+baseline_ablation seed 4: best epoch 53, val {'event_macro_f1': 0.7376377254875905, 'event_accuracy': 0.8684605381614484, 'harm_pr_auc': 0.3407797979665517, 'harm_prevalence': 0.04127906976744186, 'epoch': 53}
+                  event_macro_f1           harm_pr_auc          
+                            mean       std        mean       std
+variant                                                         
+baseline                0.741293  0.004613    0.351493  0.011992
+baseline_ablation       0.736261  0.002196    0.335172  0.006176

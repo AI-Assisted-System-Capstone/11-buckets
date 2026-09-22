@@ -1,0 +1,24 @@
+[bert_512_bs8x4_nobucket] 60000 train rows, 1875 optimizer steps/epoch, cap 50 steps (4 epochs), eval every 1000000000 steps, patience 3, batch 8 x accum 4, fp16=False, length bucketing=False
+[bert_512_bs8x4_nobucket] step 10/50 loss 2.3250 (CE 1.9416, BCE 0.3834) 0.43 steps/s, ETA to the 50-step cap 0.03 h (early stopping may end sooner)
+[bert_512_bs8x4_nobucket] step 20/50 loss 2.3108 (CE 1.6197, BCE 0.6911) 0.43 steps/s, ETA to the 50-step cap 0.02 h (early stopping may end sooner)
+[bert_512_bs8x4_nobucket] step 30/50 loss 1.2676 (CE 1.1394, BCE 0.1281) 0.43 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_512_bs8x4_nobucket] step 40/50 loss 2.3311 (CE 1.5809, BCE 0.7502) 0.42 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_512_bs8x4_nobucket] step 50/50 loss 1.1662 (CE 0.6681, BCE 0.4981) 0.43 steps/s, ETA to the 50-step cap 0.00 h (early stopping may end sooner)
+[bert_512_bs8x4_nobucket] validation @ step 50: {'event_macro_f1': 0.12619745845552297, 'event_accuracy': 0.58984375, 'harm_pr_auc': 0.029912129834471026, 'harm_prevalence': 0.027522935779816515, 'step': 50, 'epoch': 0}
+[bert_512_bs8x4_nobucket]   new best (val harm PR-AUC + event macro-F1 = 0.1561) -> best_model.pt
+RESULT bert_512_bs8x4_nobucket on mps: 0.430 optimizer steps/s (2.33 s/step, 32 rows/step) -> 1.21 h/epoch, 4.8 h to the 4-epoch cap; swapped out 3.25 GB -> UNRELIABLE (memory thrashing)
+[bert_320_bs8x4_bucket] 60000 train rows, 1875 optimizer steps/epoch, cap 50 steps (4 epochs), eval every 1000000000 steps, patience 3, batch 8 x accum 4, fp16=False, length bucketing=True
+[bert_320_bs8x4_bucket] step 10/50 loss 0.9213 (CE 0.7504, BCE 0.1709) 0.68 steps/s, ETA to the 50-step cap 0.02 h (early stopping may end sooner)
+[bert_320_bs8x4_bucket] step 20/50 loss 2.1478 (CE 1.7442, BCE 0.4036) 0.74 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_320_bs8x4_bucket] step 30/50 loss 2.1321 (CE 1.4245, BCE 0.7076) 0.76 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_320_bs8x4_bucket] step 40/50 loss 1.7207 (CE 0.9376, BCE 0.7831) 0.77 steps/s, ETA to the 50-step cap 0.00 h (early stopping may end sooner)
+[bert_320_bs8x4_bucket] step 50/50 loss 1.6121 (CE 1.2670, BCE 0.3451) 0.78 steps/s, ETA to the 50-step cap 0.00 h (early stopping may end sooner)
+[bert_320_bs8x4_bucket] validation @ step 50: {'event_macro_f1': 0.1255190097308241, 'event_accuracy': 0.58984375, 'harm_pr_auc': 0.031650639339142625, 'harm_prevalence': 0.027522935779816515, 'step': 50, 'epoch': 0}
+[bert_320_bs8x4_bucket]   new best (val harm PR-AUC + event macro-F1 = 0.1572) -> best_model.pt
+RESULT bert_320_bs8x4_bucket on mps: 0.780 optimizer steps/s (1.28 s/step, 32 rows/step) -> 0.67 h/epoch, 2.7 h to the 4-epoch cap; swapped out 0.6 GB -> UNRELIABLE (memory thrashing)
+[bert_320_bs16x2_bucket] 60000 train rows, 1875 optimizer steps/epoch, cap 50 steps (4 epochs), eval every 1000000000 steps, patience 3, batch 16 x accum 2, fp16=False, length bucketing=True
+[bert_320_bs16x2_bucket] step 10/50 loss 1.2396 (CE 0.8368, BCE 0.4028) 0.83 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_320_bs16x2_bucket] step 20/50 loss 1.9363 (CE 1.6791, BCE 0.2572) 0.89 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_320_bs16x2_bucket] step 30/50 loss 1.7100 (CE 1.4568, BCE 0.2532) 0.85 steps/s, ETA to the 50-step cap 0.01 h (early stopping may end sooner)
+[bert_320_bs16x2_bucket] step 40/50 loss 2.0560 (CE 1.6915, BCE 0.3644) 0.87 steps/s, ETA to the 50-step cap 0.00 h (early stopping may end sooner)
+[bert_320_bs16x2_bucket] step 50/50 loss 1.1999 (CE 0.7526, BCE 0.4473) 0.89 steps/s, ETA to the 50-step cap 0.00 h (early stopping may end sooner)

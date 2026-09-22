@@ -1,0 +1,76 @@
+{
+  "split_sizes": {
+    "TRAIN": 60000,
+    "VALIDATION": 10000,
+    "TEST": 10000
+  },
+  "hurt_prevalence": {
+    "TRAIN": 0.15108502525403766,
+    "VALIDATION": 0.04127906976744186,
+    "TEST": 0.048484119345524546
+  },
+  "no_event_code_rows": 64,
+  "no_harm_score_rows": 12997,
+  "rare_train_buckets_lt50": {
+    "SH": 25
+  },
+  "per_split": {
+    "TRAIN": {
+      "rows": 60000,
+      "head_a_rows": 59946,
+      "head_b_rows": 50091,
+      "hurt": 7568,
+      "buckets": {
+        "ADR": 939,
+        "C": 5909,
+        "E": 30049,
+        "EQ": 3008,
+        "FALL": 1504,
+        "I": 2239,
+        "ME": 10977,
+        "O": 1877,
+        "SH": 25,
+        "SI": 958,
+        "T": 2461
+      }
+    },
+    "VALIDATION": {
+      "rows": 10000,
+      "head_a_rows": 9997,
+      "head_b_rows": 8600,
+      "hurt": 355,
+      "buckets": {
+        "ADR": 112,
+        "C": 1029,
+        "E": 5048,
+        "EQ": 429,
+        "FALL": 217,
+        "I": 291,
+        "ME": 1943,
+        "O": 343,
+        "SH": 10,
+        "SI": 154,
+        "T": 421
+      }
+    },
+    "TEST": {
+      "rows": 10000,
+      "head_a_rows": 9993,
+      "head_b_rows": 8312,
+      "hurt": 403,
+      "buckets": {
+        "ADR": 164,
+        "C": 978,
+        "E": 5097,
+        "EQ": 466,
+        "FALL": 240,
+        "I": 420,
+        "ME": 1731,
+        "O": 348,
+        "SH": 1,
+        "SI": 200,
+        "T": 348
+      }
+    }
+  }
+}
